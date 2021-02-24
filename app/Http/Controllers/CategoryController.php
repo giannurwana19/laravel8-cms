@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('categories.index');
+        return view('categories.index')->with('categories', Category::latest()->get());
     }
 
     /**
@@ -35,7 +35,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'unique:categories']
+        ]);
+
+        Category::create($request->all());
+
+        return redirect()->route('categories.index')->with('success', 'Category created successfully!');
     }
 
     /**

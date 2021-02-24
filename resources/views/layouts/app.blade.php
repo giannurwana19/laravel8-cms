@@ -82,11 +82,20 @@
         <main class="py-4">
             @auth
             <div class="container">
+                @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                    <span>{{ session('success') }}</span>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @endif
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="list-group">
                             <div class="list-group-item"><a href="">Posts</a></div>
-                            <div class="list-group-item"><a href="">Categories</a></div>
+                            <div class="list-group-item"><a href="{{ route('categories.index') }}">Categories</a></div>
                         </div>
                     </div>
                     <div class="col-md-8">
