@@ -14,6 +14,7 @@
                 <tr>
                     <th>No</th>
                     <th>Name</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +22,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $category->name }}</td>
+                    <td><a href="{{ route('categories.edit', $category) }}" class="btn btn-sm btn-outline-success">Edit</a></td>
                 </tr>
                 @endforeach
             </tbody>
