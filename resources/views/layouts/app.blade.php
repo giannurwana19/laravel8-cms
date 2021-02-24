@@ -92,7 +92,7 @@
                 @endif
 
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-4 mb-3">
                         <div class="list-group">
                             <div class="list-group-item"><a href="">Posts</a></div>
                             <div class="list-group-item"><a href="{{ route('categories.index') }}">Categories</a></div>
@@ -107,9 +107,10 @@
             @yield('content')
             @endauth
 
-
         </main>
     </div>
+
+    @stack('scripts')
 </body>
 
 </html>
