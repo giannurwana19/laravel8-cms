@@ -12,6 +12,7 @@
                 <tr>
                     <th>Image</th>
                     <th>Title</th>
+                    <th>Category</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -20,6 +21,7 @@
                 <tr>
                     <td><img src="{{ asset("storage/$post->image") }}" width="100" alt="{{ $post->title }}"></td>
                     <td>{{ $post->title }}</td>
+                    <td>{{ $post->category->name  ?? 'Uncategorized'}}</td>
                     <td>
                         <form action="{{ route('posts.destroy', $post) }}" method="POST">
                             @if($post->trashed())

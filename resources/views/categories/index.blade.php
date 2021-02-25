@@ -14,6 +14,7 @@
                 <tr>
                     <th style="width: 25px">No</th>
                     <th>Name</th>
+                    <th>Posts</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -22,6 +23,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $category->name }}</td>
+                    <td>{{ $category->posts->count() }}</td>
                     <td>
                         <a href="{{ route('categories.edit', $category) }}"
                             class="btn btn-sm btn-outline-success">Edit</a>

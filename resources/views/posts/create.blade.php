@@ -71,6 +71,18 @@
                 @enderror
             </div>
 
+            <div class="form-group">
+                <label for="category_id">Category</label>
+                <select name="category_id" id="category_id" class="form-control">
+                    @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @if($post->category_id == $category->id) selected @endif>{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                @error('image')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <button type="submit" class="btn btn-success">
                 {{ isset($post) ? 'Update' : 'Submit' }}
             </button>

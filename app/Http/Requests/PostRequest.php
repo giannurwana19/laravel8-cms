@@ -28,7 +28,8 @@ class PostRequest extends FormRequest
             'description' => ['required'],
             'image' => ['image', 'mimes:png,jpg', 'max:512'],
             'content' => ['required'],
-            'published_at' => ['nullable']
+            'published_at' => ['nullable'],
+            'category_id' => ['nullable']
         ];
     }
 }
