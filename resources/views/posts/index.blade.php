@@ -21,17 +21,21 @@
                     <td><img src="{{ asset("storage/$post->image") }}" width="100" alt="{{ $post->title }}"></td>
                     <td>{{ $post->title }}</td>
                     <td>
+                        @if(!$post->trashed())
+                        <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-outline-success">Edit</a>
+                        @endif
                         <form action="{{ route('posts.destroy', $post) }}" method="POST">
-                            <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-outline-success">Edit</a>
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this post?')">Delete</button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this post?')">
+                                {{ $post->trashed() ? 'Destroy' : 'Delete' }}
+                            </button>
                         </form>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="2">The posts is not found!</td>
+                    <td colspan="3" class="text-center">The posts is not found!</td>
                 </tr>
                 @endforelse
             </tbody>

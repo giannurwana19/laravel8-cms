@@ -93,10 +93,13 @@
 
                 <div class="row">
                     <div class="col-md-4 mb-3">
-                        <div class="list-group">
-                            <div class="list-group-item"><a href="{{ route('posts.index') }}">Posts</a></div>
-                            <div class="list-group-item"><a href="{{ route('categories.index') }}">Categories</a></div>
-                        </div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="{{ route('posts.index') }}">Posts</a></li>
+                            <li class="list-group-item"><a href="{{ route('categories.index') }}">Categories</a></li>
+                        </ul>
+                        <ul class="list-group mt-5">
+                            <li class="list-group-item"><a href="{{ route('posts.trashed') }}">Trashed Posts</a></li>
+                        </ul>
                     </div>
                     <div class="col-md-8">
                         @yield('content')

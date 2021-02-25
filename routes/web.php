@@ -26,3 +26,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('categories', CategoryController::class)->except('show');
 Route::resource('posts', PostController::class);
+
+Route::get('trashed-posts', [PostController::class, 'trashed'])->name('posts.trashed');
