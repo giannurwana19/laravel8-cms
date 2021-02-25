@@ -21,8 +21,12 @@
                     <td><img src="{{ asset("storage/$post->image") }}" width="100" alt="{{ $post->title }}"></td>
                     <td>{{ $post->title }}</td>
                     <td>
-                        <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-outline-success">Edit</a>
-                        <button class="btn btn-sm btn-outline-danger">Delete</button>
+                        <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                            <a href="{{ route('posts.edit', $post) }}" class="btn btn-sm btn-outline-success">Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this post?')">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 @empty
