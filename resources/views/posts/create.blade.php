@@ -11,15 +11,19 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        Create Post
+        {{ isset($post) ? 'Edit Post' : 'Create Post' }}
     </div>
     <div class="card-body">
-        <form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ isset($post) ? route('posts.update', $post) : route('posts.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            @isset($post)
+            @method('PATCH')
+            @endisset
 
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" id="title" class="form-control @error('title') is-invalid @enderror" name="title">
+                <input type="text" id="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $post->title ?? old('title') }}">
                 @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -28,7 +32,7 @@
             <div class="form-group">
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="30" rows="2"
-                    class="form-control @error('description') is-invalid @enderror"></textarea>
+                    class="form-control @error('description') is-invalid @enderror">{{ $post->description ?? old('description') }}</textarea>
                 @error('description')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -36,7 +40,7 @@
 
             <div class="form-group">
                 <label for="content">Content</label>
-                <input id="content" type="hidden" name="content">
+                <input id="content" type="hidden" name="content" value="{{ $post->content ?? old('content') }}">
                 <trix-editor input="content"></trix-editor>
                 @error('content')
                 <div class="invalid-feedback">{{ $message }}</div>
@@ -46,11 +50,18 @@
             <div class="form-group">
                 <label for="published_at">Pubished At</label>
                 <input type="text" id="published_at" class="form-control @error('published_at') is-invalid @enderror"
-                    name="published_at">
+                    name="published_at" value="{{ $post->published_at ?? old('published_at') }}">
                 @error('published_at')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
+
+            @isset($post)
+            <div class="form-group">
+                <img src="{{ asset("storage/$post->image") }}" class="w-50" alt="{{ $post->title }}">
+            </div>
+            @endisset
 
             <div class="form-group">
                 <label for="image">Image</label>
@@ -60,7 +71,9 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success">
+                {{ isset($post) ? 'Update' : 'Submit' }}
+            </button>
         </form>
     </div>
 </div>
