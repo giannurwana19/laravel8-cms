@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('posts', PostController::class);
+    Route::resource('tags', TagController::class);
 
     Route::get('trashed-posts', [PostController::class, 'trashed'])->name('posts.trashed');
     Route::get('restore-post/{id}', [PostController::class, 'restore'])->name('posts.restore');

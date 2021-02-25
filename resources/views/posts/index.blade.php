@@ -41,7 +41,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="text-center">The posts is not found!</td>
+                    <td colspan="3" class="text-center">Posts is not found!</td>
                 </tr>
                 @endforelse
             </tbody>

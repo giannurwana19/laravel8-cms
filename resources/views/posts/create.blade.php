@@ -75,10 +75,10 @@
                 <label for="category_id">Category</label>
                 <select name="category_id" id="category_id" class="form-control">
                     @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" @if($post->category_id == $category->id) selected @endif>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @isset($post) @if($post->category_id == $category->id) selected @endif @endisset>{{ $category->name }}</option>
                     @endforeach
                 </select>
-                @error('image')
+                @error('category_id')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>

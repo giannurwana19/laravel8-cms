@@ -3,14 +3,14 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        {{ isset($category) ? 'Edit Category' : 'Create Category' }}
+        {{ isset($tag) ? 'Edit Tag' : 'Create Tag' }}
     </div>
     <div class="card-body">
-        <form action="{{ isset($category) ? route('categories.update', $category) : route('categories.store') }}"
+        <form action="{{ isset($tag) ? route('tags.update', $tag) : route('tags.store') }}"
             method="POST">
             @csrf
 
-            @if(isset($category))
+            @if(isset($tag))
             @method('PUT')
             @endif
 
@@ -27,11 +27,11 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" class="form-control" name="name"
-                    value="{{ isset($category) ? $category->name : old('name') }}">
+                    value="{{ isset($tag) ? $tag->name : old('name') }}">
             </div>
 
             <button class="btn btn-success">
-                {{ isset($category) ? 'Update' : 'Submit' }}
+                {{ isset($tag) ? 'Update' : 'Submit' }}
             </button>
         </form>
     </div>
