@@ -28,3 +28,5 @@ Route::resource('categories', CategoryController::class)->except('show');
 Route::resource('posts', PostController::class);
 
 Route::get('trashed-posts', [PostController::class, 'trashed'])->name('posts.trashed');
+Route::get('restore-posts/{id}', [PostController::class, 'restore'])->name('posts.restore');
+
