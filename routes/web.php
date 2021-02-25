@@ -22,11 +22,28 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('categories', CategoryController::class)->except('show');
-Route::resource('posts', PostController::class);
+    Route::resource('categories', CategoryController::class)->except('show');
+    Route::resource('posts', PostController::class);
 
-Route::get('trashed-posts', [PostController::class, 'trashed'])->name('posts.trashed');
-Route::get('restore-post/{id}', [PostController::class, 'restore'])->name('posts.restore');
+    Route::get('trashed-posts', [PostController::class, 'trashed'])->name('posts.trashed');
+    Route::get('restore-post/{id}', [PostController::class, 'restore'])->name('posts.restore');
+});
 
+
+
+
+
+
+
+
+
+
+// h: DOKUMETNASI
+
+// verifyCategoryCount adalah middleware buatan kita, setelah itu daftarkan di kernel.php
+// untuk memastikan category sudah ada sebelum post dibuat
+// Route::resource('posts', PostController::class)->middleware('verifyCategoryCount');
+// pada kasus ini kita menerapkan middleware verifyCategoryCount di constructor PostController
