@@ -74,6 +74,10 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        if($category->posts()->count()){
+            return redirect()->route('categories.index')->with('error', 'Cannot delete category, it has some posts');
+        }
+
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully!');

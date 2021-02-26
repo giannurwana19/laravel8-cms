@@ -4,8 +4,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css"
     integrity="sha512-5m1IeUDKtuFGvfgz32VVD0Jd/ySGX7xdLxhqemTmThxHdgqlgPdupWoSN8ThtUSLpAGBvA8DY2oO7jJCrGdxoA=="
     crossorigin="anonymous" />
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -71,7 +71,8 @@
 
             <div class="form-group">
                 <label for="image">Image</label>
-                <input type="file" id="image" class="form-control @error('image') is-invalid @enderror" name="image" onchange="upload(event)">
+                <input type="file" id="image" class="form-control @error('image') is-invalid @enderror" name="image"
+                    onchange="upload(event)">
                 @error('image')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -93,7 +94,7 @@
             @if($tags->count())
             <div class="form-group">
                 <label for="tags">Tags</label>
-                <select multiple name="tags[]" id="tags" class="form-control">
+                <select multiple name="tags[]" id="tags" class="form-control tag-selector">
                     @foreach($tags as $tag)
                     <option value="{{ $tag->id }}" @isset($post) @if($post->hasTag($tag->id)) selected @endif
                         @endisset>{{ $tag->name }}</option>
@@ -115,16 +116,20 @@
     integrity="sha512-2RLMQRNr+D47nbLnsbEqtEmgKy67OSCpWJjJM394czt99xj3jJJJBQ43K7lJpfYAYtvekeyzqfZTx2mqoDh7vg=="
     crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
-    flatpickr('#published_at', {
-        enableTime: true
-    });
-
     function upload(e){
-        const image = document.querySelector('.image-view');
-        image.src = URL.createObjectURL(e.target.files[0]);
-        image.alt = e.target.files[0].name;
-    }
+            const image = document.querySelector('.image-view');
+            image.src = URL.createObjectURL(e.target.files[0]);
+            image.alt = e.target.files[0].name;
+        }
+
+        $('.tag-selector').select2();
+
+        flatpickr('#published_at', {
+            enableTime: true
+        });
+
 </script>
 @endpush

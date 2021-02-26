@@ -96,13 +96,13 @@ class PostController extends Controller
         $data = $request->validated();
         $data['image'] = $post->image;
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $image = $request->file('image')->store('images');
 
             $post->deleteImage();
 
             $data['image'] = $image;
-        }else {
+        } else {
             $data['image'] = $post->image;
         }
 
@@ -126,6 +126,7 @@ class PostController extends Controller
         if ($post->trashed()) {
             $post->deleteImage();
             $post->forceDelete();
+            $post->tags()->detach();
 
             return redirect()->route('posts.trashed')->with('success', 'Post deleted permanent successfully!');
         }
