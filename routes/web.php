@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +27,15 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::middleware('admin')->group(function () {
+        Route::get('users', [UserController::class, 'index'])->name('users.index');
+        Route::post('users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
+    });
+
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('posts', PostController::class);
     Route::resource('tags', TagController::class);
+
 
     Route::get('trashed-posts', [PostController::class, 'trashed'])->name('posts.trashed');
     Route::get('restore-post/{id}', [PostController::class, 'restore'])->name('posts.restore');
