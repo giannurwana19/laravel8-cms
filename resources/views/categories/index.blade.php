@@ -14,7 +14,7 @@
                 <tr>
                     <th style="width: 25px">No</th>
                     <th>Name</th>
-                    <th>Posts</th>
+                    <th>Posts Count</th>
                     <th>Action</th>
                 </tr>
             </thead>

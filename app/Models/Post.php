@@ -32,4 +32,20 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    /**
+     * check if post has tag
+     *
+     * @param  mixed $tags
+     * @return void
+     */
+    public function hasTag($tags)
+    {
+        return in_array($tags, $this->tags()->pluck('id')->toArray());
+    }
 }

@@ -13,6 +13,7 @@
                     <th>Image</th>
                     <th>Title</th>
                     <th>Category</th>
+                    <th>Tags Count</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -22,6 +23,7 @@
                     <td><img src="{{ asset("storage/$post->image") }}" width="100" alt="{{ $post->title }}"></td>
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->category->name  ?? 'Uncategorized'}}</td>
+                    <td>{{ $post->tags->count() }}</td>
                     <td>
                         <form action="{{ route('posts.destroy', $post) }}" method="POST">
                             @if($post->trashed())
@@ -41,7 +43,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="text-center">Posts is not found!</td>
+                    <td colspan="5" class="text-center">Posts is not found!</td>
                 </tr>
                 @endforelse
             </tbody>

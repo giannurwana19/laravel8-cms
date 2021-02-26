@@ -14,7 +14,8 @@
                 <tr>
                     <th style="width: 25px">No</th>
                     <th>Name</th>
-                    <th>Posts</th>
+                    <th>Posts Count</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $tag->name }}</td>
+                    <td>{{ $tag->posts->count() }}</td>
                     <td>
                         <a href="{{ route('tags.edit', $tag) }}" class="btn btn-sm btn-outline-success">Edit</a>
                         <button class="btn btn-sm btn-outline-danger"
@@ -30,7 +32,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3" class="text-center">Tags not found!</td>
+                    <td colspan="4" class="text-center">Tags not found!</td>
                 </tr>
                 @endforelse
             </tbody>

@@ -14,7 +14,8 @@
         {{ isset($post) ? 'Edit Post' : 'Create Post' }}
     </div>
     <div class="card-body">
-        <form action="{{ isset($post) ? route('posts.update', $post) : route('posts.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ isset($post) ? route('posts.update', $post) : route('posts.store') }}" method="POST"
+            enctype="multipart/form-data">
             @csrf
 
             @isset($post)
@@ -23,7 +24,8 @@
 
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" id="title" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $post->title ?? old('title') }}">
+                <input type="text" id="title" class="form-control @error('title') is-invalid @enderror" name="title"
+                    value="{{ $post->title ?? old('title') }}">
                 @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -57,15 +59,19 @@
             </div>
 
 
-            @isset($post)
+            @if(isset($post))
             <div class="form-group">
-                <img src="{{ asset("storage/$post->image") }}" class="w-50" alt="{{ $post->title }}">
+                <img src="{{ asset("storage/$post->image") }}" class="w-50 image-view" alt="{{ $post->title }}">
             </div>
-            @endisset
+            @else
+            <div class="form-group">
+                <img src="" class="w-50 image-view" alt="">
+            </div>
+            @endif
 
             <div class="form-group">
                 <label for="image">Image</label>
-                <input type="file" id="image" class="form-control @error('image') is-invalid @enderror" name="image">
+                <input type="file" id="image" class="form-control @error('image') is-invalid @enderror" name="image" onchange="upload(event)">
                 @error('image')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -75,13 +81,26 @@
                 <label for="category_id">Category</label>
                 <select name="category_id" id="category_id" class="form-control">
                     @foreach ($categories as $category)
-                    <option value="{{ $category->id }}" @isset($post) @if($post->category_id == $category->id) selected @endif @endisset>{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @isset($post) @if($post->category_id == $category->id) selected
+                        @endif @endisset>{{ $category->name }}</option>
                     @endforeach
                 </select>
                 @error('category_id')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
+
+            @if($tags->count())
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <select multiple name="tags[]" id="tags" class="form-control">
+                    @foreach($tags as $tag)
+                    <option value="{{ $tag->id }}" @isset($post) @if($post->hasTag($tag->id)) selected @endif
+                        @endisset>{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endif
 
             <button type="submit" class="btn btn-success">
                 {{ isset($post) ? 'Update' : 'Submit' }}
@@ -101,5 +120,11 @@
     flatpickr('#published_at', {
         enableTime: true
     });
+
+    function upload(e){
+        const image = document.querySelector('.image-view');
+        image.src = URL.createObjectURL(e.target.files[0]);
+        image.alt = e.target.files[0].name;
+    }
 </script>
 @endpush
