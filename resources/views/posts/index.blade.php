@@ -17,6 +17,8 @@
                     <th>Action</th>
                 </tr>
             </thead>
+
+
             <tbody>
                 @forelse ($posts as $post)
                 <tr>
@@ -48,6 +50,8 @@
                 @endforelse
             </tbody>
         </table>
+
+        {{ $posts->links() }}
     </div>
 </div>
 @endsection

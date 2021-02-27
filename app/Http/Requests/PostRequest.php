@@ -24,13 +24,14 @@ class PostRequest extends FormRequest
     public function rules()
     {
         return [
+            'user_id' => ['nullable'],
             'title' => ['required'],
             'description' => ['required'],
             'image' => ['image', 'mimes:png,jpg', 'max:512'],
             'content' => ['required'],
             'published_at' => ['nullable'],
             'category_id' => ['nullable'],
-            'tags' => ['nullable']
+            'tags' => ['required']
         ];
     }
 }

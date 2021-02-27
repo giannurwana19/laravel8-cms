@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -14,7 +16,11 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('pages.index');
+        $posts = Post::latest()->paginate(4);
+        $tags = Tag::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
+
+        return view('pages.index', compact('posts', 'tags', 'categories'));
     }
 
     /**
@@ -22,8 +28,8 @@ class BlogController extends Controller
      *
      * @return void
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        return view('pages.show');
+        return view('pages.show', compact('post'));
     }
 }

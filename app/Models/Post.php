@@ -18,6 +18,8 @@ class Post extends Model
      */
     protected $guarded = ['id'];
 
+    protected $with = ['tags', 'category'];
+
     /**
      * deleteImage post
      *
@@ -57,5 +59,15 @@ class Post extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * showImage
+     *
+     * @return void
+     */
+    public function getPhotoAttribute()
+    {
+        return $this->image ? asset("storage/{$this->image}") : asset('storage/images/default-photo.jpg');
     }
 }

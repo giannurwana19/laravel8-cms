@@ -37,11 +37,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * isAdmin
+     *
+     * @return void
+     */
     public function isAdmin()
     {
         return $this->role == 'admin';
     }
 
+    /**
+     * posts
+     *
+     * @return void
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
