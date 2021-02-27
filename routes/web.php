@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
         Route::get('users', [UserController::class, 'index'])->name('users.index');
         Route::post('users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
     });
+    
+    Route::patch('users/profile', [UserController::class, 'update'])->name('users.update-profile');
+    Route::get('users/profile', [UserController::class, 'edit'])->name('users.edit-profile');
 
     Route::resource('categories', CategoryController::class)->except('show');
     Route::resource('posts', PostController::class);

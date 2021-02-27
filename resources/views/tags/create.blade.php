@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" class="form-control" name="name"
-                    value="{{ isset($tag) ? $tag->name : old('name') }}">
+                    value="{{ isset($tag) ? $tag->name : old('name') }}" autofocus>
             </div>
 
             <button class="btn btn-success">

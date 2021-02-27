@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" id="title" class="form-control @error('title') is-invalid @enderror" name="title"
-                    value="{{ $post->title ?? old('title') }}">
+                    value="{{ $post->title ?? old('title') }}" autofocus>
                 @error('title')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
