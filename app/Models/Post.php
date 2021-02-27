@@ -18,7 +18,7 @@ class Post extends Model
      */
     protected $guarded = ['id'];
 
-    protected $with = ['tags', 'category'];
+    protected $with = ['tags', 'category', 'user'];
 
     /**
      * deleteImage post

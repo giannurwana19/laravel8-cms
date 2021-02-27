@@ -12,7 +12,7 @@
                     <input type="text" class="form-control" placeholder="Search blog here..."
                         aria-label="Recipient's username" aria-describedby="button-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
                     </div>
                 </div>
             </div>
@@ -36,10 +36,8 @@
                         <img src="{{ $post->photo }}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the
-                                card's
-                                content.</p>
+                            <span class="badge badge-success">Category : {{ $post->category->name }}</span>
+                            <p class="card-text">{{ $post->description }}</p>
                             <a href="{{ route('blogs.show', $post) }}" class="btn btn-sm btn-primary">Detail...</a>
                         </div>
                     </div>
