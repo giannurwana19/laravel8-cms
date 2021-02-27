@@ -48,4 +48,14 @@ class Post extends Model
     {
         return in_array($tags, $this->tags()->pluck('id')->toArray());
     }
+
+    /**
+     * user
+     *
+     * @return void
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

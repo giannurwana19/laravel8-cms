@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('welcome');
 });
 
 Auth::routes();
@@ -31,7 +32,7 @@ Route::middleware('auth')->group(function () {
         Route::get('users', [UserController::class, 'index'])->name('users.index');
         Route::post('users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
     });
-    
+
     Route::patch('users/profile', [UserController::class, 'update'])->name('users.update-profile');
     Route::get('users/profile', [UserController::class, 'edit'])->name('users.edit-profile');
 
@@ -39,12 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('posts', PostController::class);
     Route::resource('tags', TagController::class);
 
-
     Route::get('trashed-posts', [PostController::class, 'trashed'])->name('posts.trashed');
     Route::get('restore-post/{id}', [PostController::class, 'restore'])->name('posts.restore');
 });
 
 
+Route::get('blog-posts', [BlogController::class, 'index'])->name('blogs.index');
+Route::get('blog-posts/{id}', [BlogController::class, 'show'])->name('blogs.show');
 
 
 
