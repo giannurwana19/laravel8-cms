@@ -8,13 +8,16 @@
 
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search blog here..."
-                        aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                <form action="{{ route('blogs.index') }}">
+                    <div class="input-group mb-3">
+                        <input type="text" name="q" value="{{ request()->query('q') }}" class="form-control"
+                            placeholder="Search blog here...">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary" type="button"
+                                id="button-addon2">Search</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -43,7 +46,7 @@
                     </div>
                 </div>
                 @empty
-                <h4>No Posts!</h4>
+                <h4>No Posts for {{ request()->query('q') }}!</h4>
                 @endforelse
             </div>
         </div>

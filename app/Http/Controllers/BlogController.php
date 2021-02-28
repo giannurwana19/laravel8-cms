@@ -16,11 +16,16 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->paginate(4);
-        $tags = Tag::orderBy('name')->get();
-        $categories = Category::orderBy('name')->get();
+        $this->data['posts'] = Post::latest()->paginate(4);
+        $this->data['tags'] = Tag::orderBy('name')->get();
+        $this->data['categories'] = Category::orderBy('name')->get();
 
-        return view('pages.index', compact('posts', 'tags', 'categories'));
+        $search = request()->query('q');
+        if($search){
+            $this->data['posts'] = Post::where('title', 'LIKE', "%{$search}%")->paginate(4)->withQueryString();
+        }
+
+        return view('pages.index', $this->data);
     }
 
     /**
@@ -33,3 +38,15 @@ class BlogController extends Controller
         return view('pages.show', compact('post'));
     }
 }
+
+
+
+
+
+
+
+
+
+// h: DOKUMENTASI
+// paada links pagination, kita juga bisa tambahkan, jika tidak ingin pakai withQueryString() di controller
+// $posts->appends(['q' => request()->query('q')])->links()
