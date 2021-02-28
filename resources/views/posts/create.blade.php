@@ -80,7 +80,8 @@
 
             <div class="form-group">
                 <label for="category_id">Category</label>
-                <select name="category_id" id="category_id" class="form-control @error('category_id') is-invalid @enderror">
+                <select name="category_id" id="category_id"
+                    class="form-control @error('category_id') is-invalid @enderror">
                     @foreach ($categories as $category)
                     <option value="{{ $category->id }}" @isset($post) @if($post->category_id == $category->id) selected
                         @endif @endisset>{{ $category->name }}</option>
@@ -94,7 +95,8 @@
             @if($tags->count())
             <div class="form-group">
                 <label for="tags">Tags</label>
-                <select multiple name="tags[]" id="tags" class="form-control tag-selector @error('tags') is-invalid @enderror">
+                <select multiple name="tags[]" id="tags"
+                    class="form-control tag-selector @error('tags') is-invalid @enderror">
                     @foreach($tags as $tag)
                     <option value="{{ $tag->id }}" @isset($post) @if($post->hasTag($tag->id)) selected @endif
                         @endisset>{{ $tag->name }}</option>
@@ -131,7 +133,8 @@
         $('.tag-selector').select2();
 
         flatpickr('#published_at', {
-            enableTime: true
+            enableTime: true,
+            enableSeconds: true
         });
 
 </script>

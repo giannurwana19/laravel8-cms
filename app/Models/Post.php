@@ -18,7 +18,21 @@ class Post extends Model
      */
     protected $guarded = ['id'];
 
+    /**
+     * with
+     *
+     * @var array
+     */
     protected $with = ['tags', 'category', 'user'];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'published_at',
+    ];
 
     /**
      * deleteImage post
@@ -72,6 +86,17 @@ class Post extends Model
     }
 
     /**
+     * scopePublished
+     *
+     * @param  mixed $query
+     * @return void
+     */
+    public function scopePublished($query)
+    {
+        return $query->where('published_at', '<=', now());
+    }
+
+    /**
      * scopeSearched
      *
      * @param  mixed $query
@@ -81,9 +106,9 @@ class Post extends Model
     {
         $search = request()->query('q');
         if(!$search){
-            return $query->latest();
+            return $query->published()->latest();
         }
 
-        return $query->where('title', 'LIKE', "%{$search}%");
+        return $query->published()->where('title', 'LIKE', "%{$search}%");
     }
 }
