@@ -70,4 +70,20 @@ class Post extends Model
     {
         return $this->image ? asset("storage/{$this->image}") : asset('storage/images/default-photo.jpg');
     }
+
+    /**
+     * scopeSearched
+     *
+     * @param  mixed $query
+     * @return void
+     */
+    public function scopeSearched($query)
+    {
+        $search = request()->query('q');
+        if(!$search){
+            return $query->latest();
+        }
+
+        return $query->where('title', 'LIKE', "%{$search}%");
+    }
 }

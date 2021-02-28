@@ -16,14 +16,9 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $this->data['posts'] = Post::latest()->paginate(4);
+        $this->data['posts'] = Post::searched()->paginate(4);
         $this->data['tags'] = Tag::orderBy('name')->get();
         $this->data['categories'] = Category::orderBy('name')->get();
-
-        $search = request()->query('q');
-        if ($search) {
-            $this->data['posts'] = Post::where('title', 'LIKE', "%{$search}%")->paginate(4)->withQueryString();
-        }
 
         return view('pages.index', $this->data);
     }
@@ -42,13 +37,8 @@ class BlogController extends Controller
     {
         $this->data['category'] = $category;
         $this->data['categories'] = Category::orderBy('name')->get();
-        $this->data['posts'] = $category->posts()->latest()->paginate(4);
+        $this->data['posts'] = $category->posts()->searched()->paginate(4);
         $this->data['tags'] = Tag::orderBy('name')->get();
-
-        $search = request()->query('q');
-        if ($search) {
-            $this->data['posts'] = $category->posts()->where('title', 'LIKE', "%{$search}%")->paginate(4)->withQueryString();
-        }
 
         return view('pages.category.index', $this->data);
     }
@@ -62,7 +52,7 @@ class BlogController extends Controller
     {
         $this->data['tag'] = $tag;
         $this->data['tags'] = Tag::orderBy('name')->get();
-        $this->data['posts'] = $tag->posts()->latest()->paginate(4);
+        $this->data['posts'] = $tag->posts()->searched()->paginate(4);
         $this->data['categories'] = Category::orderBy('name')->get();
 
         $search = request()->query('q');

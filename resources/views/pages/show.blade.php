@@ -25,18 +25,24 @@
     <h1 class="mt-3">{{ $post->title }}</h1>
     <p>Posted by : {{ $post->user->name }} | {{ $post->created_at->format('d F Y H:i') }}</p>
     <hr>
-    <span class="badge badge-success">Category : {{ $post->category->name }}</span>
+    <a href="{{ route('blogs.category', $post->category) }}" class="badge badge-success">Category :
+        {{ $post->category->name }}</a>
     @foreach ($post->tags as $tag)
-    <span class="badge badge-danger">{{ $tag->name }}</span>
+    <a href="{{ route('blogs.tag', $tag) }}" class="badge badge-danger">{{ $tag->name }}</a>
     @endforeach
     <p>Description: {{ $post->description }}</p>
     <p>{!! $post->content !!}</p>
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <div class="addthis_inline_share_toolbox"></div>
 
     <div id="disqus_thread"></div>
 </div>
 @endsection
 
 @push('scripts')
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-603b1ae00c684cd3"></script>
 <script>
     /**
         *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
