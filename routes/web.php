@@ -48,6 +48,8 @@ Route::middleware('auth')->group(function () {
 Route::get('blog-posts', [BlogController::class, 'index'])->name('blogs.index');
 Route::get('blog-posts/{post}', [BlogController::class, 'show'])->name('blogs.show');
 
+Route::get('blogs/categories/{category}', [BlogController::class, 'category'])->name('blogs.category');
+Route::get('blogs/tags/{tag}', [BlogController::class, 'tag'])->name('blogs.tag');
 
 
 

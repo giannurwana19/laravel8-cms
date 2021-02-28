@@ -3,7 +3,7 @@
 @section('content')
 <div class="jumbotron jumbotron-fluid mt-n4">
     <div class="container text-center py-4">
-        <h1 class="display-4">Posts</h1>
+        <h1 class="display-4">Category {{ $category->name }}</h1>
         <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
 
         <div class="row justify-content-center">
@@ -26,7 +26,7 @@
 <div class="container">
     <div class="row my-3">
         <div class="col">
-            <h4 class="text-center">Blog Posts</h4>
+            <h4 class="text-center">Post for category : {{ $category->name }}</h4>
             <hr>
         </div>
     </div>
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 @empty
-                <h4>No Posts for {{ request()->query('q') }}!</h4>
+                <h4>No Posts for category {{ $category->name }}!</h4>
                 @endforelse
             </div>
         </div>
