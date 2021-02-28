@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 @empty
-                <h4>No Posts for tag {{ $category->name }}!</h4>
+                <h4>No Posts for tag {{ $tag->name }}!</h4>
                 @endforelse
             </div>
         </div>
